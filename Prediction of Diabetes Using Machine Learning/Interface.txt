@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>DiaPredict</title>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@800&display=swap" rel="stylesheet">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body class="white darken-1">
+      <div class="navbar-fixed">
+          <nav class="black">
+              <div class="nav-wrapper">
+                  <a href="#!" class="brand-logo" style="margin-left: 80px;">DiaPredict</a>
+                  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                  <ul class="right hide-on-med-and-down">
+                      <li><a class="grey lighten-3 black-text" href="index.html">Home</a></li>
+                      <li class="snav"><a href="diag.html">Diagnosis</a></li>
+                  </ul>
+              </div>
+          </nav>
+      </div>
+
+      <ul class="sidenav" id="mobile-demo">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="diag.html">Diagnosis</a></li>
+      </ul>
+      <div>
+        <img class="img1" src="Images/Diabetes-rafiki (1).png" alt="">
+        <h1 class="heading1">Empowering <br> You With</h1>
+        <h1 class="heading2">Diabetes Prediction</h1>
+        <h3 class="tagline">Your Personalized Health Journey Begins Here...!</h3>
+      </div>
+      <div>
+        <button class="btn1"></button>
+        <a href="Signup.html" class="btn1">Signup</a>
+        <button class="btn2"></button>
+        <a href="login.html" class="btn2">Login</a>
+      </div>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="script.js"></script>
+      <noscript>Enable Javascript in your Browser</noscript>
+    </body>
+  </html>
