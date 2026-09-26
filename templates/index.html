@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <title>DiaPredict · Model demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">D</span> DiaPredict <span class="brand-tag">MODEL DEMO</span></a>
+    <a class="top-link" href="#about">About this demo <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <p class="eyebrow"><span></span> MACHINE LEARNING · CLASSIFICATION</p>
+      <h1>Explore how a model reads sample health data.</h1>
+      <p class="lede">Enter values from the dataset to see the output of an educational classifier trained on the Pima Indians Diabetes dataset.</p>
+      <div class="privacy-note"><span aria-hidden="true">◎</span><p><strong>Runs on your computer</strong><br>Form values are processed locally and are not saved by this demo.</p></div>
+      <div class="dataset-note"><strong>About the dataset</strong><p>The sample dataset contains records from Pima women. Its model scores may not generalize to other people or settings.</p></div>
+    </section>
+
+    <section class="panel" aria-labelledby="form-title">
+      <div class="panel-heading"><div><p class="eyebrow">01 / INPUT</p><h2 id="form-title">Sample measurements</h2></div><span class="required-note">All fields required</span></div>
+      {% if errors %}<div class="error-box" role="alert"><strong>Please check these values:</strong><ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+      <form action="{{ url_for('predict') }}" method="post">
+        <div class="fields">
+          {% for field in fields %}
+          <label class="field" for="{{ field.name }}">
+            <span class="field-label">{{ field.label }}</span>
+            <span class="input-wrap"><input id="{{ field.name }}" name="{{ field.name }}" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ values.get(field.name, field.default) if values else field.default }}" required><span>{{ field.unit }}</span></span>
+          </label>
+          {% endfor %}
+        </div>
+        <button class="submit" type="submit">Run sample prediction <span aria-hidden="true">→</span></button>
+      </form>
+
+      {% if result %}
+      <section class="result" aria-live="polite" aria-labelledby="result-title">
+        <div class="result-head"><div><p class="eyebrow">02 / MODEL OUTPUT</p><h2 id="result-title">{{ 'Class 1' if result['class'] == 1 else 'Class 0' }}</h2></div><span class="result-chip">{{ 'positive' if result['class'] == 1 else 'negative' }} class</span></div>
+        <p class="score-line">Class 1 model score <strong>{{ '%.1f'|format(result['probability'] * 100) }}%</strong></p>
+        <div class="meter" role="img" aria-label="Class 1 model score {{ '%.1f'|format(result['probability'] * 100) }} percent"><span style="width: {{ '%.1f'|format(result['probability'] * 100) }}%"></span></div>
+        <p class="model-info">{{ result['model'] }} · selected with 5-fold training-data CV (ROC AUC {{ '%.3f'|format(result['cv_auc']) }})</p>
+        <p class="result-disclaimer">This is a model output on a limited public dataset, not an individual risk estimate or a medical diagnosis.</p>
+      </section>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer id="about"><span>DIAPREDICT · LEARNING PROJECT</span><p>For educational exploration only. Do not use this output for medical decisions.</p><a href="https://archive.ics.uci.edu/dataset/34/diabetes" target="_blank" rel="noreferrer">Dataset record ↗</a></footer>
+</body>
+</html>
